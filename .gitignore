@@ -1,0 +1,21 @@
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Runtime
+coverage/
+tmp/
