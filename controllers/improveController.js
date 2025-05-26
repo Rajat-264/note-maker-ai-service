@@ -21,7 +21,8 @@ const improveTopic = async (req, res) => {
       model: "llama3-70b-8192",
       messages: [{
         role: 'user',
-        content: `Improve and organize this, and don't add any model generated description and don't add any comments, also highlight the headings:\n${fullText}`
+        content: `Improve and organize this, and don't add any model generated description and don't add any comments,
+         also the headings should be in bold text. The content should be properly indented. Make it look professional, but understandable:\n${fullText}`
       }],
     });
 
