@@ -28,7 +28,9 @@ const improveTopic = async (req, res) => {
     const improvedText = response.choices[0].message.content;
     const improvedNotes = improvedText.split('\n');
 
-    // Instead of saving now, return both versions
+    topic.notes = improvedNotes;
+    await topic.save();
+
     res.json({
       message: 'Improved version generated successfully',
       originalNotes,
