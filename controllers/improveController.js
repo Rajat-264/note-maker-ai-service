@@ -19,11 +19,11 @@ const enhanceTopic = async (req, res) => {
 
     const systemPrompts = {
       improve: "Improve and organize the following content. Use proper indentation, bold headings, and keep it professional and clear.",
-      summarize: "Summarize the following content into concise bullet points.",
-      expand: "Elaborate and expand the following content to explain the concepts in detail, with clarity.",
+      summarize: "Summarize and organize the following content into concise bullet points. Return only textual points.",
+      expand: "Elaborate, expand and organize the following content to explain the concepts in detail, with clarity. Return text only, dont return objects",
       formal: "Rewrite the following content in a formal tone suitable for academic or professional purposes.",
       flashcards: "Convert the content into question-answer style flashcards.",
-      simplify: "Simplify the content so it's understandable by a high school student. Use simpler words and shorter sentences."
+      simplify: "Simplify the content so it's understandable by a high school student. Use simpler words and shorter sentences. Return text only."
     };
 
     const prompt = systemPrompts[mode] || systemPrompts.improve;
