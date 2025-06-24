@@ -1,7 +1,7 @@
 const express = require('express');
-const { improveTopic, replaceNotes } = require('../controllers/improveController.js');
+const { enhanceTopic, replaceNotes } = require('../controllers/improveController.js');
 
 const router = express.Router();
-router.post('/:topicId', improveTopic);
-router.post('/topics/:id/notes/replace', replaceNotes);
+router.post('/enhance/:topicId', enhanceTopic);
+router.put('/replace/:id', replaceNotes);
 module.exports = router;

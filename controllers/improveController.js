@@ -9,40 +9,48 @@ const openai = new OpenAI({
   baseURL: "https://api.groq.com/openai/v1", 
 });
 
-const improveTopic = async (req, res) => {
+const enhanceTopic = async (req, res) => {
   try {
+    const { mode = 'improve' } = req.query;
     const topic = await Topic.findById(req.params.topicId);
     if (!topic) return res.status(404).json({ message: 'Topic not found' });
 
-    const originalNotes = topic.notes;
-    const fullText = originalNotes.join('\n');
+    const fullText = topic.notes.join('\n');
+
+    const systemPrompts = {
+      improve: "Improve and organize the following content. Use proper indentation, bold headings, and keep it professional and clear.",
+      summarize: "Summarize the following content into concise bullet points.",
+      expand: "Elaborate and expand the following content to explain the concepts in detail, with clarity.",
+      formal: "Rewrite the following content in a formal tone suitable for academic or professional purposes.",
+      flashcards: "Convert the content into question-answer style flashcards.",
+      simplify: "Simplify the content so it's understandable by a high school student. Use simpler words and shorter sentences."
+    };
+
+    const prompt = systemPrompts[mode] || systemPrompts.improve;
 
     const response = await openai.chat.completions.create({
       model: "llama3-70b-8192",
-      messages: [{
-        role: 'user',
-        content: `Improve and organize this, and don't add any model generated description and don't add any comments,
-         also the headings should be in bold text. The content should be properly indented. Make it look professional, but understandable:\n${fullText}`
-      }],
+      messages: [
+        { role: 'user', content: `${prompt}\n\n${fullText}` }
+      ]
     });
 
     const improvedText = response.choices[0].message.content;
     const improvedNotes = improvedText.split('\n');
 
-    topic.notes = improvedNotes;
-    await topic.save();
-
     res.json({
-      message: 'Improved version generated successfully',
-      originalNotes,
-      improvedNotes
+      message: `${mode.charAt(0).toUpperCase() + mode.slice(1)} version generated successfully`,
+      originalNotes: topic.notes,
+      improvedNotes,
+      mode
     });
 
   } catch (err) {
-    console.error('AI Improvement Error:', err);
+    console.error(`AI ${req.query.mode || 'improve'} Error:`, err);
     res.status(500).json({ message: 'AI enhancement failed' });
   }
 };
+
 
 const replaceNotes = async (req, res) => {
   try {
