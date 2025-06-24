@@ -68,4 +68,4 @@ const replaceNotes = async (req, res) => {
   }
 };
 
-module.exports = { improveTopic, replaceNotes };
+module.exports = { enhanceTopic, replaceNotes };
