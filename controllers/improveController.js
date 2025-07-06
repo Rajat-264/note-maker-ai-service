@@ -18,12 +18,12 @@ const enhanceTopic = async (req, res) => {
     const fullText = topic.notes.join('\n');
 
     const systemPrompts = {
-      improve: "Improve and organize the following content. Use proper indentation, bold headings, and keep it professional and clear. Remove IDs and metadata. Do not include any explanation, notes, or preamble — only output the final result.",
-      summarize: "Summarize and organize the following content into concise bullet points. Return only textual points. Remove IDs and metadata. Do not include any explanation, notes, or preamble — only output the final result.",
-      expand: "Elaborate, expand and organize the following content to explain the concepts in detail, with clarity. Return text only, dont return objects. Remove IDs and metadata. Do not include any explanation, notes, or preamble — only output the final result.",
-      formal: "Rewrite the following content in a formal tone suitable for academic or professional purposes. Remove IDs and metadata. Do not include any explanation, notes, or preamble — only output the final result.",
-      flashcards: "Convert the content into question-answer style flashcards. Remove IDs and metadata. Do not include any explanation, notes, or preamble — only output the final result.",
-      simplify: "Simplify the content so it's understandable by a high school student. Use simpler words and shorter sentences. Return text only. Remove IDs and metadata. Do not include any explanation, notes, or preamble — only output the final result."
+      improve: "Improve and organize the following content. Return only the improved version.- Use bold headings for each section (surround them with **).- Add indentation and spacing where appropriate.- Do not include any explanation or extra text outside the content.",
+      summarize: "Summarize and organize the following content into concise bullet points. Return only the improved version.- Use bold headings for each section (surround them with **).- Add indentation and spacing where appropriate.- Do not include any explanation or extra text outside the content.",
+      expand: "Elaborate, expand and organize the following content to explain the concepts in detail, with clarity.Return only the improved version.- Use bold headings for each section (surround them with **).- Add indentation and spacing where appropriate.- Do not include any explanation or extra text outside the content.",
+      formal: "Rewrite the following content in a formal tone suitable for academic or professional purposes. Return only the improved version.- Use bold headings for each section (surround them with **).- Add indentation and spacing where appropriate.- Do not include any explanation or extra text outside the content.",
+      flashcards: "Convert the content into question-answer style flashcards.Return only the improved version.- Use bold headings for each section (surround them with **).- Add indentation and spacing where appropriate.- Do not include any explanation or extra text outside the content.",
+      simplify: "Simplify the content so it's understandable by a high school student. Use simpler words and shorter sentences. Return only the improved version.- Use bold headings for each section (surround them with **).- Add indentation and spacing where appropriate.- Do not include any explanation or extra text outside the content."
     };
 
     const prompt = systemPrompts[mode] || systemPrompts.improve;
