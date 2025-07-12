@@ -14,4 +14,6 @@ app.use(express.json());
 
 app.use('/improve', improveRoutes);
 
+app.get('/ping', (req, res) => res.send('pong'));
+
 app.listen(5002, () => console.log('AI service running on port 5002'));
